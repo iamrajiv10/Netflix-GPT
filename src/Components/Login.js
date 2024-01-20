@@ -5,6 +5,7 @@ import { auth } from "../Utils/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
+import { BG_URL, USER_AVATAR } from "../Utils/constants";
 
 const Login = () => {
 
@@ -29,7 +30,7 @@ const Login = () => {
                     // Signed up 
                     const user = userCredential.user;
                     updateProfile(user, {
-                        displayName: name.current.value, photoURL: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png"
+                        displayName: name.current.value, photoURL: USER_AVATAR
                     }).then(() => {
                         // Profile updated!
                         const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -40,7 +41,6 @@ const Login = () => {
                         // An error occurred
                         setErrorMessage(error.message);
                     });
-                    console.log(user);
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -54,7 +54,6 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     // ...
-                    console.log(user);
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -63,7 +62,7 @@ const Login = () => {
                 });
         }
 
-    }
+    };
 
     const toggleSignInForm = () => {
         setIsSignInForm(!isSignInForm);
@@ -71,12 +70,11 @@ const Login = () => {
     return (
         <div>
             <Header />
-            <div>
-                <img className="absolute"
-                    src="https://assets.nflxext.com/ffe/siteui/vlv3/c31c3123-3df7-4359-8b8c-475bd2d9925d/15feb590-3d73-45e9-9e4a-2eb334c83921/IN-en-20231225-popsignuptwoweeks-perspective_alpha_website_small.jpg"
+            <div className="absolute">
+                <img className="h-screen w-screen object-cover" src={BG_URL}
                     alt="background" />
             </div>
-            <form className="absolute p-12 bg-black w-3/12 my-36 mx-auto right-0 left-0 text-white rounded-xl bg-opacity-80"
+            <form className="absolute p-12 bg-black w-5/6 md:w-5/12 my-36 mx-auto right-0 left-0 text-white rounded-xl bg-opacity-80"
                 onSubmit={(e) => { e.preventDefault() }}>
                 <h1 className="font-bold text-3xl py-4">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
                 {!isSignInForm && (<input ref={name} type="text" placeholder="Full Name" className="p-2 my-4 w-full bg-stone-700" />)}
@@ -94,7 +92,7 @@ const Login = () => {
                 />
                 <p className="text-red-500">{errorMessage}</p>
                 <button className="p-4 my-6 bg-red-700 w-full rounded-lg"
-                    on onClick={handleButtonClick}>{isSignInForm ? "Sign In" : "Sign Up"}</button>
+                    onClick={handleButtonClick}>{isSignInForm ? "Sign In" : "Sign Up"}</button>
                 <p className="my-8  text-slate-500">
                     {isSignInForm ? "New to Netflix? " : "Already Registered? "}
                     <span className="text-white cursor-pointer"
