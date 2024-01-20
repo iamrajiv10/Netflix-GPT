@@ -6,7 +6,7 @@ const GptMovieSuggestion = () => {
  console.log(movieName, movieResults);
     if(!movieName) return null;
     return (
-        <div className="p-4 bg-black bg-opacity-80">
+        <div className="p-4 bg-black bg-opacity-80 my-3 py-10">
             <MovieList title={movieName} movies={movieResults} />
         </div>
     )

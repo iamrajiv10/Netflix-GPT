@@ -1,6 +1,31 @@
+// import { createSlice } from "@reduxjs/toolkit";
+
+// const tvSlice = createSlice({
+//     name: "tvSeries",
+//     initialState: {
+//         airingTodayTvSeries: null,
+//         popularTvSeries: null,
+//         onTheAirTvSeries: null,
+//     },
+//     reducers: {
+//         addAiringTodayTvSeries: (state,action) => {
+//             state.airingTodayTvSeries = action.payload;
+//         },
+//         addPopularTvSeries: (state, action) => {
+//             state.popularTvSeries = action.payload
+//         },
+//         addOnTheAirTvSeries: (state, action) => {
+//             state.onTheAirTvSeries = action.payload
+//         }
+//     }
+// });
+
+// export const {addAiringTodayTvSeries, addPopularTvSeries, addOnTheAirTvSeries} = tvSlice.actions;
+// export default tvSlice.reducer;
+
 import { createSlice } from "@reduxjs/toolkit";
 
-const tvSlice = createSlice({
+const tvSeriesSlice = createSlice({
     name: "tvSeries",
     initialState: {
         airingTodayTvSeries: null,
@@ -8,17 +33,17 @@ const tvSlice = createSlice({
         onTheAirTvSeries: null,
     },
     reducers: {
-        addAiringTodayTvSeries: (state,action) => {
+        addAiringTodayTvSeries: (state, action) => {
             state.airingTodayTvSeries = action.payload;
         },
         addPopularTvSeries: (state, action) => {
-            state.popularTvSeries = action.payload
+            state.popularTvSeries = action.payload;
         },
         addOnTheAirTvSeries: (state, action) => {
-            state.onTheAirTvSeries = action.payload
+            state.onTheAirTvSeries = action.payload;
         }
-    }
+    },
 });
 
-export const {addAiringTodayTvSeries, addPopularTvSeries, addOnTheAirTvSeries} = tvSlice.actions;
-export default tvSlice.reducer;
+export const {addAiringTodayTvSeries, addOnTheAirTvSeries, addPopularTvSeries} =  tvSeriesSlice.actions;
+export default tvSeriesSlice.reducer;
