@@ -9,7 +9,7 @@ const MovieList = ({title,movies}) => {
         <div className="flex overflow-x-scroll ">
             <div className="flex gap-2">
                 {movies?.map((movie)=> (
-                <MovieCards key={movie.id} posterPath={movie.poster_path} />
+                <MovieCards key={movie.id} id={movie.id} posterPath={movie.poster_path} />
                 ))}
             </div>
         </div>

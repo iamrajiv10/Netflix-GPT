@@ -7,7 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../Utils/userSlice";
 import { LOGO, SUPPORTED_LANGUAGES } from "../Utils/constants";
-import { toggleGptSearchView } from "../Utils/GptSlice";
+import { toggleGptSearchView, toggleMovieDetail } from "../Utils/GptSlice";
 import { changeLanguage } from "../Utils/configSlice";
 
 const Header = () => {
@@ -15,6 +15,7 @@ const Header = () => {
     const navigate = useNavigate();
     const user = useSelector((store) => store.user)
     const showGptSearch = useSelector((store) => store.gpt.showGptSearch)
+    const showMovieDetail = useSelector((store) => store.gpt.showMovieDetail)
 
     const handleLogOut = () => {
         signOut(auth).then(() => {
@@ -50,6 +51,10 @@ const Header = () => {
         dispatch(toggleGptSearchView());
     };
 
+    const handleMovieDetailClick = () => {
+        dispatch(toggleMovieDetail());
+    }
+
     const handleLanguagechange = (e) => {
         dispatch(changeLanguage(e.target.value))
     }
@@ -71,9 +76,17 @@ const Header = () => {
                     <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)}
                 </select>
                 ) }
+                {!showMovieDetail && (
                 <button className="p-2 h-10 bg-red-600 text-white rounded-lg"
                 onClick={handleGptSearchClick}>
-                    {showGptSearch? "Home Page" : "GPT Search"}</button>
+                    {showGptSearch? "Home Page" : "GPT Search"}
+                </button>
+                )}
+                {showMovieDetail && 
+                <button className="p-2 h-10 bg-red-600 text-white rounded-lg"
+                onClick={handleMovieDetailClick}>
+                    Home Page
+                </button>}
                 <img className="h-10 rounded-lg"
                 src={user?.photoURL}
                     alt="user" />
